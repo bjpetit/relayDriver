@@ -7,31 +7,29 @@ the GPIO pins.
 
 ### Module setup/teardown modules
 1. Init/Shutdown Module
-  * initRelayBoard()
+  > initRelayBoard()
       Set up the GPIO library and set the GPIO pins for the relay board
 
-  * shutdownRelayBoard()
+  > shutdownRelayBoard()
       Shutdown the GPIO complex
       
 2. Query operations
-  * getRelayState(channel)
-      return state of the relay. Possible values are relay_open and relay_closed.
+  > getRelayState(channel)
+     return state of the relay. Possible values are relay_open and relay_closed.
 
-  * isRelayOpen(channel)
+  > isRelayOpen(channel)
       return true if relay is open, false if relay is closed
       
-  * isRelayClosed(channel)
+  > isRelayClosed(channel)
       return true if relay is closed, false if relay is open
 
 3. Update operations
-  * Open Relay
-    openRelay(channel)
+   > openRelay(channel)
       Set the relay at channel to an open state. If already open, this will do nothing.
 
-  * Close Relay
-    closeRelay(channel)
+   > closeRelay(channel)
       Set the relay at channel to an closed state. If already closed, this will do nothing.
        
-  * Pulse Relay
-     pulseRelay(channel)
+   > pulseRelay(channel)
+     Open/Close relay for a fraction of a second.
 
