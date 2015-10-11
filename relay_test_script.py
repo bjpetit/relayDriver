@@ -69,4 +69,3 @@ print "shutting down relay board..."
 relayDriver.shutdownRelayBoard()
 
 print "DONE"
-

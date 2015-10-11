@@ -28,6 +28,9 @@ relay_closed = GPIO.LOW
 # Pulse time - how long to hold pulseRelay
 pulse_time = .2
 
+# Global status flag
+relayBoardInitialized = 0
+
 #
 #   initRelayBoard
 #     Fire up GPIO library and set the GPIO pins 
@@ -35,6 +38,11 @@ pulse_time = .2
 #   This must be run prior to accessing the relays
 #
 def initRelayBoard(): 
+    global relayBoardInitialized
+    if relayBoardInitialized == 1:
+        print "Error: Board already initialized" 
+	return -1
+
     GPIO.setmode(GPIO.BOARD)
 
     # Iterate through pin map and init each pin
@@ -45,10 +53,23 @@ def initRelayBoard():
         GPIO.setup(pin, GPIO.OUT)
         GPIO.output(pin, GPIO.HIGH)
 
+    relayBoardInitialized = 1
+
+    return 0
+
 def shutdownRelayBoard():
+    global relayBoardInitialized
+    if relayBoardInitialized == 0:
+        print "Error: Board not initialized"
+        return -1
+
     if debug:
         print "calling cleanup on GPIO"
     GPIO.cleanup()
+
+    relayBoardInitialized = 0;
+
+    return 0
 
 #    getRelayState
 #      return the state of the queried relay
